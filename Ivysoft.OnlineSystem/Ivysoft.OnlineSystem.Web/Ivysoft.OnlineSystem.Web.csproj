@@ -255,13 +255,13 @@
     <Content Include="Scripts\jquery-3.2.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Ivysoft.OnlineSystem.Data.Models\Ivysoft.OnlineSystem.Data.Models.csproj">
+      <Project>{9ba91457-d53c-44bf-bfe9-36fa89425e1c}</Project>
+      <Name>Ivysoft.OnlineSystem.Data.Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Ivysoft.OnlineSystem.Data\Ivysoft.OnlineSystem.Data.csproj">
       <Project>{1451BACA-F34B-40C9-8E85-A53739F0F7B7}</Project>
       <Name>Ivysoft.OnlineSystem.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Ivysoft.OnlineSystem.Models\Ivysoft.OnlineSystem.Models.csproj">
-      <Project>{AFBD0BAC-48CA-4CEC-9F04-0F92C86600A3}</Project>
-      <Name>Ivysoft.OnlineSystem.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

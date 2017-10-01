@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Ivysoft.OnlineSystem.Data;
+using Ivysoft.OnlineSystem.Data.Migrations;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -12,6 +15,8 @@ namespace Ivysoft.OnlineSystem.Web
     {
         protected void Application_Start()
         {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<OnlineSystemDbContext, Configuration>());
+
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
