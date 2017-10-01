@@ -1,5 +1,7 @@
 ﻿using Ivysoft.OnlineSystem.Data.Models.Contracts;
 using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Ivysoft.OnlineSystem.Data.Models.Abstracts
 {
@@ -10,14 +12,19 @@ namespace Ivysoft.OnlineSystem.Data.Models.Abstracts
             this.Id = Guid.NewGuid();
         }
 
+        [Key]
         public Guid Id { get; set; }
 
-        public DateTime? CreatedOn { get; set; }
-
-        public DateTime? ModifiedOn { get; set; }
-
+        [Index]
         public bool IsDeleted { get; set; }
 
+        [DataType(DataType.DateTime)]
         public DateTime? DeletedOn { get; set; }
+
+        [DataType(DataType.DateTime)]
+        public DateTime? CreatedOn { get; set; }
+
+        [DataType(DataType.DateTime)]
+        public DateTime? ModifiedOn { get; set; }
     }
 }

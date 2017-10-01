@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ivysoft.OnlineSystem.Data",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ivysoft.OnlineSystem.Data.Models", "Ivysoft.OnlineSystem.Data.Models\Ivysoft.OnlineSystem.Data.Models.csproj", "{9BA91457-D53C-44BF-BFE9-36FA89425E1C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ivysoft.OnlineSystem.Services", "Ivysoft.OnlineSystem.Services\Ivysoft.OnlineSystem.Services.csproj", "{6699CC71-9740-4D5F-AC34-CC5E60F1BBC2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{9BA91457-D53C-44BF-BFE9-36FA89425E1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9BA91457-D53C-44BF-BFE9-36FA89425E1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9BA91457-D53C-44BF-BFE9-36FA89425E1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6699CC71-9740-4D5F-AC34-CC5E60F1BBC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6699CC71-9740-4D5F-AC34-CC5E60F1BBC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6699CC71-9740-4D5F-AC34-CC5E60F1BBC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6699CC71-9740-4D5F-AC34-CC5E60F1BBC2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -38,6 +44,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{1451BACA-F34B-40C9-8E85-A53739F0F7B7} = {59A4EFD0-39FD-442A-B980-59F7DE0D409D}
 		{9BA91457-D53C-44BF-BFE9-36FA89425E1C} = {59A4EFD0-39FD-442A-B980-59F7DE0D409D}
+		{6699CC71-9740-4D5F-AC34-CC5E60F1BBC2} = {8BCFA161-81DA-4FE3-8CC6-88C6D057C8A1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {988CBAF7-9CFC-49AB-8031-79D109EAA456}

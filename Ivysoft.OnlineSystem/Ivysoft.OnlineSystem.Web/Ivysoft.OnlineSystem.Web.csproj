@@ -166,6 +166,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Administration\AdministrationAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -194,6 +195,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Areas\Administration\Views\web.config" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -248,6 +250,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Administration\Controllers\" />
+    <Folder Include="Areas\Administration\Models\" />
+    <Folder Include="Areas\Administration\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -262,6 +267,10 @@
     <ProjectReference Include="..\Ivysoft.OnlineSystem.Data\Ivysoft.OnlineSystem.Data.csproj">
       <Project>{1451BACA-F34B-40C9-8E85-A53739F0F7B7}</Project>
       <Name>Ivysoft.OnlineSystem.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ivysoft.OnlineSystem.Services\Ivysoft.OnlineSystem.Services.csproj">
+      <Project>{6699cc71-9740-4d5f-ac34-cc5e60f1bbc2}</Project>
+      <Name>Ivysoft.OnlineSystem.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

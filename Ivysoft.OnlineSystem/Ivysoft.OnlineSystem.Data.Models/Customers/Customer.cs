@@ -1,14 +1,16 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using Ivysoft.OnlineSystem.Data.Models.Contracts;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System;
 
 namespace Ivysoft.OnlineSystem.Data.Models
 {
-    public partial class Customer  : IdentityUser
+    public partial class Customer  : IdentityUser, IAuditable, IDeletable
     {
         public Customer()
         {
@@ -56,6 +58,17 @@ namespace Ivysoft.OnlineSystem.Data.Models
 
         [InverseProperty("Customer")]
         public virtual ICollection<Order> Orders { get; set; }
+
+        public bool IsDeleted { get ; set; }
+
+        [DataType(DataType.DateTime)]
+        public DateTime? DeletedOn { get; set; }
+
+        [DataType(DataType.DateTime)]
+        public DateTime? CreatedOn { get; set; }
+
+        [DataType(DataType.DateTime)]
+        public DateTime? ModifiedOn { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<Customer> manager)
         {
