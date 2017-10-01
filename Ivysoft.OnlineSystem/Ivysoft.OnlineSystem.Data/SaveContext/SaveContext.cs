@@ -1,6 +1,6 @@
 ﻿namespace Ivysoft.OnlineSystem.Data.SaveContext
 {
-    public class SaveContext
+    public class SaveContext : ISaveContext
     {
         private readonly OnlineSystemDbContext context;
 
