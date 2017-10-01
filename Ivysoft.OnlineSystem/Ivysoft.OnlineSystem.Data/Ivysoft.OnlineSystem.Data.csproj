@@ -56,6 +56,11 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="OnlineSystemDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Repositories\EfRepository.cs" />
     <Compile Include="Repositories\IEfRepository.cs" />
     <Compile Include="SaveContext\ISaveContext.cs" />
@@ -70,6 +75,13 @@
       <Project>{9BA91457-D53C-44BF-BFE9-36FA89425E1C}</Project>
       <Name>Ivysoft.OnlineSystem.Data.Models</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,15 +1,18 @@
 ﻿using Ivysoft.OnlineSystem.Data.Models.Abstracts;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Ivysoft.OnlineSystem.Data.Models
 {
     [Table("Order Details")]
-    public partial class OrderDetail : DataModel
+    public partial class OrderDetail/* : DataModel*/
     {
-        [Column("OrderID")]
+        [Key]
+        [Column("OrderID", Order = 1)]
         public int OrderId { get; set; }
 
-        [Column("ProductID")]
+        [Key]
+        [Column("ProductID", Order = 2)]
         public int ProductId { get; set; }
 
         public float Discount { get; set; }

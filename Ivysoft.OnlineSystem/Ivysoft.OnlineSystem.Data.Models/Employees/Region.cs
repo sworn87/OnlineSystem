@@ -5,15 +5,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Ivysoft.OnlineSystem.Data.Models
 {
-    public partial class Region : DataModel
+    public partial class Region/* : DataModel*/
     {
         public Region()
         {
             Territories = new HashSet<Territory>();
         }
 
-        //[Column("RegionID")]
-        //public int RegionId { get; set; }
+        [Column("RegionID")]
+        public int RegionId { get; set; }
 
         [Required]
         [MaxLength(50)]

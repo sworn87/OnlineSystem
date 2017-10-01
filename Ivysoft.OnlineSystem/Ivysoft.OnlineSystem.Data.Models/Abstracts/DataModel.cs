@@ -7,13 +7,14 @@ namespace Ivysoft.OnlineSystem.Data.Models.Abstracts
 {
     public abstract class DataModel : IAuditable, IDeletable
     {
-        public DataModel()
-        {
-            this.Id = Guid.NewGuid();
-        }
+        //public DataModel()
+        //{
+        //    this.Id = Guid.NewGuid();
+        //}
 
-        [Key]
-        public Guid Id { get; set; }
+        //[Key]
+        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        //public int Id { get; set; }
 
         [Index]
         public bool IsDeleted { get; set; }

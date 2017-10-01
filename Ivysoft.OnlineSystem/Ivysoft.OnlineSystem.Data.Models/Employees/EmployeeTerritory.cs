@@ -4,12 +4,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Ivysoft.OnlineSystem.Data.Models
 {
-    public partial class EmployeeTerritory : DataModel
+    public partial class EmployeeTerritory/* : DataModel*/
     {
-        [Column("EmployeeID")]
+        [Key]
+        [Column("EmployeeID", Order = 1)]
         public int EmployeeId { get; set; }
 
-        [Column("TerritoryID")]
+        [Key]
+        [Column("TerritoryID", Order = 2)]
         [MaxLength(20)]
         public string TerritoryId { get; set; }
 

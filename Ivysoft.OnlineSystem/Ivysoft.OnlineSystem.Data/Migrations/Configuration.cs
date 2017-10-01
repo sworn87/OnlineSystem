@@ -1,11 +1,15 @@
 namespace Ivysoft.OnlineSystem.Data.Migrations
 {
     using Ivysoft.OnlineSystem.Data.Models;
+    using Ivysoft.OnlineSystem.Data.Properties;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
     using System;
+    using System.Collections.Generic;
     using System.Data.Entity.Migrations;
+    using System.IO;
     using System.Linq;
+    using System.Text.RegularExpressions;
 
     public sealed class Configuration : DbMigrationsConfiguration<OnlineSystemDbContext>
     {
@@ -21,8 +25,8 @@ namespace Ivysoft.OnlineSystem.Data.Migrations
         protected override void Seed(OnlineSystemDbContext context)
         {
             this.SeedUsers(context);
-        }
 
+        }
         private void SeedUsers(OnlineSystemDbContext context)
         {
             if (!context.Roles.Any())
@@ -34,9 +38,9 @@ namespace Ivysoft.OnlineSystem.Data.Migrations
                 var role = new IdentityRole { Name = roleName };
                 roleManager.Create(role);
 
-                var userStore = new UserStore<Customer>(context);
-                var userManager = new UserManager<Customer>(userStore);
-                var customer = new Customer
+                var userStore = new UserStore<User>(context);
+                var userManager = new UserManager<User>(userStore);
+                var user = new User
                 {
                     UserName = AdministratorUserName,
                     Email = AdministratorUserName,
@@ -44,8 +48,8 @@ namespace Ivysoft.OnlineSystem.Data.Migrations
                     CreatedOn = DateTime.Now
                 };
 
-                userManager.Create(customer, AdministratorPassword);
-                userManager.AddToRole(customer.Id, roleName);
+                userManager.Create(user, AdministratorPassword);
+                userManager.AddToRole(user.Id, roleName);
             }
         }
     }
