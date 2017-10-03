@@ -8,6 +8,7 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Ivysoft.OnlineSystem.Data;
 using Ivysoft.OnlineSystem.Data.Models;
+using Ivysoft.OnlineSystem.Data.Models.Aspnet;
 
 namespace Ivysoft.OnlineSystem.Web
 {
@@ -82,6 +83,22 @@ namespace Ivysoft.OnlineSystem.Web
                     new DataProtectorTokenProvider<User>(dataProtectionProvider.Create("ASP.NET Identity"));
             }
             return manager;
+        }
+    }
+
+    // Configure the application role manager used in this application. RoleManager is defined in ASP.NET Identity and is used by the application.
+    public class ApplicationRoleManager : RoleManager<ApplicationRole>
+    {
+        public ApplicationRoleManager(
+            IRoleStore<ApplicationRole, string> roleStore)
+            : base(roleStore)
+        {
+        }
+        public static ApplicationRoleManager Create(
+            IdentityFactoryOptions<ApplicationRoleManager> options, IOwinContext context)
+        {
+            return new ApplicationRoleManager(
+                new RoleStore<ApplicationRole>(context.Get<OnlineSystemDbContext>()));
         }
     }
 

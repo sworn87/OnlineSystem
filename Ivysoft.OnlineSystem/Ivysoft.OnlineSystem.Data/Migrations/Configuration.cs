@@ -1,6 +1,7 @@
 namespace Ivysoft.OnlineSystem.Data.Migrations
 {
     using Ivysoft.OnlineSystem.Data.Models;
+    using Ivysoft.OnlineSystem.Data.Models.Aspnet;
     using Ivysoft.OnlineSystem.Data.Properties;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
@@ -32,10 +33,9 @@ namespace Ivysoft.OnlineSystem.Data.Migrations
             if (!context.Roles.Any())
             {
                 var roleName = "Administrator";
-
-                var roleStore = new RoleStore<IdentityRole>(context);
-                var roleManager = new RoleManager<IdentityRole>(roleStore);
-                var role = new IdentityRole { Name = roleName };
+                var roleStore = new RoleStore<ApplicationRole>(context);
+                var roleManager = new RoleManager<ApplicationRole>(roleStore);
+                var role = new ApplicationRole { Name = roleName };
                 roleManager.Create(role);
 
                 var userStore = new UserStore<User>(context);

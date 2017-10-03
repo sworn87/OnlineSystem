@@ -15,15 +15,18 @@ namespace Ivysoft.OnlineSystem.Web.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        //private ApplicationRoleManager _roleManager;
 
         public AccountController()
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager/*, ApplicationRoleManager roleManager*/, ApplicationSignInManager signInManager )
         {
             UserManager = userManager;
+            //RoleManager = roleManager;
             SignInManager = signInManager;
+
         }
 
         public ApplicationSignInManager SignInManager
@@ -37,6 +40,18 @@ namespace Ivysoft.OnlineSystem.Web.Controllers
                 _signInManager = value; 
             }
         }
+
+        //public ApplicationRoleManager RoleManager
+        //{
+        //    get
+        //    {
+        //        return _roleManager ?? HttpContext.GetOwinContext().Get<ApplicationRoleManager>();
+        //    }
+        //    private set
+        //    {
+        //        _roleManager = value;
+        //    }
+        //}
 
         public ApplicationUserManager UserManager
         {
