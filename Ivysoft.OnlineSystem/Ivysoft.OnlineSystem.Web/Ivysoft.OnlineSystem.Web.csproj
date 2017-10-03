@@ -190,6 +190,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\JQDTColumn.cs" />
+    <Compile Include="Infrastructure\JQDTColumnOrder.cs" />
+    <Compile Include="Infrastructure\JQDTColumnOrderDirection.cs" />
+    <Compile Include="Infrastructure\JQDTColumnSearch.cs" />
+    <Compile Include="Infrastructure\JQDTParams.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

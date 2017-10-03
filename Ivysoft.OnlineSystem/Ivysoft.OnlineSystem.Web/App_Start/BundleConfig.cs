@@ -32,7 +32,8 @@ namespace Ivysoft.OnlineSystem.Web
                       "~/Content/site.css"));
 
             bundles.Add(new StyleBundle("~/Content/datatable").Include(
-                       "~/Content/DataTables/media/css/dataTables.bootstrap.min.css"));
+                      //"~/Content/DataTables/media/css/jquery.dataTables.min.css",
+                      "~/Content/DataTables/media/css/dataTables.bootstrap.min.css"));
         }
     }
 }

@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Ivysoft.OnlineSystem.Data;
 using Ivysoft.OnlineSystem.Data.Models;
+using Ivysoft.OnlineSystem.Web.Infrastructure;
 
 namespace Ivysoft.OnlineSystem.Web.Controllers
 {
@@ -18,8 +19,155 @@ namespace Ivysoft.OnlineSystem.Web.Controllers
         // GET: Customers
         public ActionResult Index()
         {
+            //var customers = db.Customers.Include(c => c.User);
+            return View(/*customers.ToList()*/);
+        }
+
+        public ActionResult GetAll(JQDTParams param)
+        {
             var customers = db.Customers.Include(c => c.User);
-            return View(customers.ToList());
+            //var customers.ToList()
+
+            //using (var db = new MBOSSEntities())
+            //{
+            //    var q = from x in db.VW_ARACMARKATIPI select x;
+            //    var nonfilteredcount = q.Count();
+            //    //filter
+            //    //-------------------------------------------------------------------
+            //    foreach (var item in param.columns)
+            //    {
+            //        var filterText = item.search.value;
+            //        if (!String.IsNullOrEmpty(filterText))
+            //        {
+            //            filterText = filterText.ToLower();
+            //            switch (item.name)
+            //            {
+            //                case "MARKAADI":
+            //                    q = q.Where(
+            //           x =>
+            //               x.MARKAADI.ToLower().Contains(filterText)
+
+            //       );
+            //                    break;
+            //                case "TIPADI":
+            //                    q = q.Where(
+            //           x =>
+            //               x.TIPADI.ToLower().Contains(filterText)
+
+            //       );
+            //                    break;
+            //            }
+            //        }
+            //    }
+            //    //order
+            //    //-------------------------------------------------------------------
+            //    foreach (var item in param.order)
+            //    {
+            //        string orderingFunction = "MARKAADI";
+            //        switch (item.column)
+            //        {
+            //            case 1:
+            //                orderingFunction = "MARKAADI";
+            //                break;
+
+            //            case 2:
+            //                orderingFunction = "TIPADI";
+            //                break;
+
+            //        }
+
+            //        q = OrderClass.OrderBy<VW_ARACMARKATIPI>(q, orderingFunction, item.dir.GetStringValue());
+            //    }
+
+            //    //result
+            //    //-------------------------------------------------------------------
+            //    var filteredCount = q.Count();
+            //    q = q.Skip(param.start).Take(param.length);
+            //    var data = q.ToList()
+            //        .Select(r => new[] {
+            //           r.ARACMARKAPK.ToString(),
+            //           r.MARKAADI,
+            //           r.TIPADI,
+            //        }
+
+            //        );
+            //    return Json(new
+            //    {
+            //        draw = param.draw,
+            //        recordsTotal = nonfilteredcount,
+            //        recordsFiltered = filteredCount,
+            //        data = data
+            //    }, JsonRequestBehavior.AllowGet);
+
+            //}
+
+
+            //var model = new ModelZa();
+            //var fileContents = System.IO.File.ReadAllText(Server.MapPath(@"~/NewFolder1/Bookings.json"));
+
+
+
+
+            //var movie1 = JsonConvert.DeserializeObject<ModelZa>(fileContents);
+            var nonfilteredcount = customers.Count();
+
+            ////filter
+            ////-------------------------------------------------------------------
+            //foreach (var item in param.columns)
+            //{
+            //    var filterText = item.search.value;
+            //    if (!String.IsNullOrEmpty(filterText))
+            //    {
+            //        filterText = filterText.ToLower();
+            //        switch (item.name)
+            //        {
+            //            case "MARKAADI":
+            //                movie1.Bookings = movie1.Bookings.Where(
+            //       x =>
+            //           x.MARKAADI.ToLower().Contains(filterText)
+
+            //   );
+            //                break;
+            //            case "TIPADI":
+            //                movie1.Bookings = q.Where(
+            //       x =>
+            //           x.TIPADI.ToLower().Contains(filterText)
+
+            //   );
+            //                break;
+            //        }
+            //    }
+            //}
+
+
+            customers = customers.OrderBy(n => n.ContactName).Skip(param.start).Take(param.length);
+
+            var data = customers.ToList().Select(r => new[]
+            {
+
+                   r.CustomerId.ToString(),
+                   r.ContactName.ToString(),
+                   r.Address.ToString(),
+                   r.City.ToString(),
+                   r.Phone.ToString()
+
+            }).ToArray();
+
+
+            //            < td > @item.Id </ td >
+            //< td > @item.Upd_Dat </ td >
+            //< td > @item.Srv_Prc </ td >
+            //< td > @item.Sta </ td >
+
+
+
+            return this.Json(new
+            {
+                draw = param.draw,
+                recordsTotal = nonfilteredcount,
+                recordsFiltered = nonfilteredcount,
+                data = data
+            }, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Customers/Details/5

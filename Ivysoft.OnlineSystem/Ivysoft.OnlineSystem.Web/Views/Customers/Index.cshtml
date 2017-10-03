@@ -6,10 +6,10 @@
 }
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Customers";
 }
 
-<h2>Index</h2>
+@*<h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -119,10 +119,130 @@
     </tr>
 }
 
-</table>
+</table>*@
 
+<div class="row" style="margin-top: 50px">
+    <div class="col-md-10">
+        <table id="table_id" class="table table-bordered" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th> Record&nbsp;# </th>
+                    <th> Contact Name </th>
+                    <th> Address </th>
+                    <th> City </th>
+                    <th> Phone </th>
+                </tr>
+                @*<tr role="row">
+                        <td rowspan="1" colspan="1" class="no-sort">
+                            <input type="text" class="form-control form-filter input-sm" name="order_id">
+                        </td>
+                        <td rowspan="1" colspan="1" class="no-sort">
+                            <div id="fromD" class="input-group date" style="margin-bottom: 5px">
+                                <input type="text" class="form-control input-sm" placeholder="From">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                            </div>
+                            <div id="toD" class="input-group date">
+                                <input type="text" class="form-control input-sm" placeholder="To">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                            </div>
+                        </td>
+                        <td rowspan="1" colspan="1" class="no-sort">
+                            <div class="margin-bottom-5" style="margin-bottom: 5px">
+                                <input type="text" class="form-control form-filter input-sm" name="order_price_from" placeholder="From">
+                            </div>
+                            <input type="text" class="form-control form-filter input-sm" name="order_price_to" placeholder="To">
+                        </td>
+                        <td rowspan="1" colspan="1" class="no-sort">
+                            <select name="order_status" class="form-control form-filter input-sm">
+                                <option value="">Select...</option>
+                                <option value="pending">Pending</option>
+                                <option value="closed">Closed</option>
+                                <option value="hold">On Hold</option>
+                                <option value="fraud">Fraud</option>
+                            </select>
+                        </td>
+                    </tr>*@
+            </thead>
+
+            @*<tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.CustomerId</td>
+                            <td>@item.ContactName</td>
+                            <td>@item.Address</td>
+                            <td>@item.City</td>
+                            <td>@item.Phone</td>
+                        </tr>
+                    }
+                </tbody>*@
+        </table>
+    </div>
+</div>
 
 @section scripts 
 {
-    @Scripts.Render("~/bundles/datatable")
+  @Scripts.Render("~/bundles/datatable")
 }
+
+<script>
+    $(document).ready(function () {
+        $('#table_id').DataTable(
+            {
+                "processing": true,
+                "serverSide": true,
+                "ajax": {
+                    "url": "customers/GetAll",
+                    "type": "POST"
+                }
+                //},
+                //    columnDefs: [
+                //    //{ targets: [0, 1], visible: true },
+                //        { targets: '_all', visible: true }
+                //]
+                //"bSortCellsTop": true
+
+                //"order": [ ],
+                //"columnDefs": [{
+                //    "targets": 'no-sort',
+                //    "orderable": false,
+                //}]
+
+            }
+            //{
+            //    responsive: true,
+            //rowReorder: true
+            //}
+        );
+
+        //table
+        //    .columns()
+        //    .search()
+        //    .draw();
+        //$('#datetimepicker').datetimepicker(
+        ////    {
+        ////    format: 'yyyy-mm-dd hh:ii'
+        ////}
+        //);
+
+        //$('#datepicker').datetimepicker({
+
+        //});
+        //$('#fromD').datepicker({
+        //    autoclose: true,
+        //    todayHighlight: true
+        //});
+        //$('#toD').datepicker({
+        //    autoclose: true,
+        //    todayHighlight: true
+        //});
+        //$('#datepicker').datepicker({
+        //    autoclose: true,
+        //    todayHighlight: true
+        //});
+    });
+</script>
