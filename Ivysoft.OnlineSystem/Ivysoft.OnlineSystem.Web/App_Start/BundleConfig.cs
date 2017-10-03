@@ -23,9 +23,16 @@ namespace Ivysoft.OnlineSystem.Web
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/datatable").Include(
+                     "~/Scripts/DataTables/media/js/jquery.dataTables.min.js",
+                     "~/Scripts/DataTables/media/js/dataTables.bootstrap.min.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new StyleBundle("~/Content/datatable").Include(
+                       "~/Content/DataTables/media/css/dataTables.bootstrap.min.css"));
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Ivysoft.OnlineSystem.Data
         {
         }
 
-        public IDbSet<Customer> Customer { get; set; }
+        public DbSet<Customer> Customers { get; set; }
 
         public override int SaveChanges()
         {
