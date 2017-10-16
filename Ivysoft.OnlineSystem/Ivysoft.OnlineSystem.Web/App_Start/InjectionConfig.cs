@@ -81,9 +81,11 @@ namespace Ivysoft.OnlineSystem.Web.App_Start
                  .BindDefaultInterface();
             });
 
-            kernel.Bind(typeof(DbContext), typeof(OnlineSystemDbContext)).To<OnlineSystemDbContext>().InRequestScope();
+            //kernel.Bind(typeof(DbContext), typeof(IOnlineSystemDbContext)).To<OnlineSystemDbContext>().InRequestScope();
             kernel.Bind(typeof(IEfRepository<>)).To(typeof(EfRepository<>));
             kernel.Bind<ISaveContext>().To<SaveContext>();
+            kernel.Bind<IOnlineSystemDbContext>().To<OnlineSystemDbContext>().InRequestScope();
+
         }        
     }
 }

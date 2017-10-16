@@ -1,30 +1,28 @@
 ﻿using System.Linq;
 using Ivysoft.OnlineSystem.Data.Models;
-using Ivysoft.OnlineSystem.Data.Repositories;
-using Ivysoft.OnlineSystem.Data.SaveContext;
+using Ivysoft.OnlineSystem.Data;
+using EntityFramework.DynamicFilters;
 
 namespace Ivysoft.OnlineSystem.Services
 {
     public class CustomerService : ICustomerService
     {
-        private readonly IEfRepository<Customer> customersRepo;
-        private readonly ISaveContext context;
+        private readonly IOnlineSystemDbContext dbContext;
 
-        public CustomerService(IEfRepository<Customer> customersRepo, ISaveContext context)
+        public CustomerService(IOnlineSystemDbContext dbContext)
         {
-            this.customersRepo = customersRepo;
-            this.context = context;
+            this.dbContext = dbContext;
         }
 
         public IQueryable<Customer> GetAll()
         {
-            return this.customersRepo.All;
+            return dbContext.All<Customer>();
         }
 
         public void Update(Customer customer)
         {
-            this.customersRepo.Update(customer);
-            this.context.Commit();
+            dbContext.Update(customer);
+            dbContext.SaveChanges();
         }
     }
 }

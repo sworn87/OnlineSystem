@@ -9,13 +9,19 @@ using System.Web.Mvc;
 using Ivysoft.OnlineSystem.Data;
 using Ivysoft.OnlineSystem.Data.Models;
 using Ivysoft.OnlineSystem.Web.Infrastructure;
+using Ivysoft.OnlineSystem.Services;
 
 namespace Ivysoft.OnlineSystem.Web.Controllers
 {
     public class CustomersController : Controller
     {
         private OnlineSystemDbContext db = new OnlineSystemDbContext();
+        private readonly ICustomerService customerService;
 
+        public CustomersController(ICustomerService customerService)
+        {
+            this.customerService = customerService;
+        }
         // GET: Customers
         public ActionResult Index()
         {
@@ -25,7 +31,8 @@ namespace Ivysoft.OnlineSystem.Web.Controllers
 
         public ActionResult GetAll(JQDTParams param)
         {
-            var customers = db.Customers.Include(c => c.User);
+            var customers = customerService.GetAll().Include(c => c.User);
+            //var customers = db.Customers.Include(c => c.User);
             //var customers.ToList()
 
             //using (var db = new MBOSSEntities())

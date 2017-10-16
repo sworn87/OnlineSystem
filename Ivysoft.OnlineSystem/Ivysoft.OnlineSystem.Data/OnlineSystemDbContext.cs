@@ -1,20 +1,36 @@
-﻿using Ivysoft.OnlineSystem.Data.Models;
+﻿using EntityFramework.DynamicFilters;
+using Ivysoft.OnlineSystem.Data.Models;
 using Ivysoft.OnlineSystem.Data.Models.Contracts;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 
 namespace Ivysoft.OnlineSystem.Data
 {
-    public class OnlineSystemDbContext : IdentityDbContext<User>
+    public class OnlineSystemDbContext : IdentityDbContext<User> , IOnlineSystemDbContext
     {
         public OnlineSystemDbContext()
             : base("LocalConnection", throwIfV1Schema: false)
         {
         }
 
-        public DbSet<Customer> Customers { get; set; }
+        public virtual IDbSet<Customer> Customers
+        {
+            get
+            {
+                return this.Set<Customer>();
+            }
+        }
+
+        public DbContext DbContext => this;
+
+    //    public new IDbSet<T> Set<T>()
+    //where T : class
+    //    {
+    //        return base.Set<T>();
+    //    }
 
         public override int SaveChanges()
         {
@@ -22,30 +38,64 @@ namespace Ivysoft.OnlineSystem.Data
             return base.SaveChanges();
         }
 
-        private void ApplyAuditInfoRules()
+
+        //public IQueryable<T> All<T>() where T : class, IDeletable
+        //{
+        //    return this.Set<T>().Where(s => !s.IsDeleted);
+        //}
+
+        public void Add<T>(T entity) where T : class, IDeletable
         {
-            foreach (var entry in
-                this.ChangeTracker.Entries()
-                    .Where(
-                        e =>
-                        e.Entity is IAuditable && ((e.State == EntityState.Added) || (e.State == EntityState.Modified))))
+            DbEntityEntry entry = this.Entry(entity);
+
+            if (entry.State != EntityState.Detached)
             {
-                var entity = (IAuditable)entry.Entity;
-                if (entry.State == EntityState.Added && entity.CreatedOn == default(DateTime))
-                {
-                    entity.CreatedOn = DateTime.Now;
-                }
-                else
-                {
-                    entity.ModifiedOn = DateTime.Now;
-                }
+                entry.State = EntityState.Added;
             }
+            else
+            {
+                this.Set<T>().Add(entity);
+            }
+        }
+
+        public void Delete<T>(T entity) where T : class, IDeletable
+        {
+            entity.IsDeleted = true;
+            entity.DeletedOn = DateTime.Now;
+
+            var entry = this.Entry(entity);
+            entry.State = EntityState.Modified;
+        }
+
+        public void Update<T>(T entity) where T : class, IDeletable
+        {
+            DbEntityEntry entry = this.Entry(entity);
+            if (entry.State == EntityState.Detached)
+            {
+                this.Set<T>().Attach(entity);
+            }
+
+            entry.State = EntityState.Modified;
         }
 
         public static OnlineSystemDbContext Create()
         {
             return new OnlineSystemDbContext();
         }
+
+        //modelBuilder.Filter("IsDeleted", (ISoftDelete d) => d.IsDeleted, false);
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            //        dbContext.DbContext.DisableFilter("IsDeleted");
+            modelBuilder.Filter("IsDeleted", (IDeletable d) => d.IsDeleted, false);
+        }
+            //public static OnlineSystemDbContext Create()
+            //{
+            //    return new OnlineSystemDbContext();
+            //}
 
         //protected override void OnModelCreating(DbModelBuilder modelBuilder)
         //{
@@ -134,5 +184,25 @@ namespace Ivysoft.OnlineSystem.Data
 
 
         //}
+
+        private void ApplyAuditInfoRules()
+        {
+            foreach (var entry in
+                this.ChangeTracker.Entries()
+                    .Where(
+                        e =>
+                        e.Entity is IAuditable && ((e.State == EntityState.Added) || (e.State == EntityState.Modified))))
+            {
+                var entity = (IAuditable)entry.Entity;
+                if (entry.State == EntityState.Added && entity.CreatedOn == default(DateTime))
+                {
+                    entity.CreatedOn = DateTime.Now;
+                }
+                else
+                {
+                    entity.ModifiedOn = DateTime.Now;
+                }
+            }
+        }
     }
 }
